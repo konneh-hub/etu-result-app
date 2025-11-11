@@ -1,0 +1,154 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eastern Technical University — Student Results</title>
+    <!-- Bootstrap CDN for quick styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'eturesultapp/css/site.css' %}">
+    
+    <style>
+      /* Sidebar helpers used across lecturer/admin pages */
+      .sidebar {
+        min-height: calc(100vh - 56px);
+        box-shadow: inset -1px 0 0 rgba(0, 0, 0, .05);
+      }
+      .sidebar .nav-link {
+        font-weight: 500;
+        padding: .75rem 1rem;
+        transition: all 0.15s;
+        color: #212529;
+      }
+      .sidebar .nav-link:hover { background-color: rgba(0,0,0,0.03); }
+      .sidebar .nav-link.active { color: #fff; }
+      .hover-bg-light:hover { background-color: rgba(0, 0, 0, .05) !important; }
+      .sidebar-heading { font-size: .75rem; text-transform: uppercase; }
+
+      .project-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+      }
+
+      .info-section {
+        margin-top: 3rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <img src="{% static 'eturesultapp/img/etu-logo.svg' %}" alt="ETU Logo" width="45" class="me-2">
+          Eastern Technical University
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Students</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'eturesultapp:course_list' %}">Courses</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'eturesultapp:result_list' %}">Results</a></li>
+            <li class="nav-item"><a class="nav-link" href="/admin/">Admin</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero / Banner Section -->
+    <section class="text-center mb-5">
+      <div class="col-auto">
+            <img src="{% static 'eturesultapp/img/etu-logo.png' %}" alt="ETU Logo" class="img-fluid" style="max-width: 120px; height: auto;">
+        </div>
+      <h1 class="mt-4 fw-bold">Welcome to Eastern Technical University</h1>
+      <p class="lead">Empowering education through innovation, research, and technology.</p>
+    </section>
+
+    <!-- Information Section -->
+    <section class="info-section">
+      <h2 class="text-center mb-4">About the Project</h2>
+      <p class="text-center mx-auto" style="max-width: 800px;">
+        The <strong>Student Results Management System</strong> is designed to streamline the process of 
+        managing, viewing, and analyzing academic results. It ensures transparency, efficiency, and 
+        accessibility for students, lecturers, and administrators at Eastern Technical University.
+      </p>
+
+      <!-- Add illustration below -->
+      <div class="text-center mt-4">
+        <img src="{% static 'eturesultapp/img/results-dashboard.jpg' %}" 
+             alt="Results Dashboard Preview" 
+             class="img-fluid rounded shadow" 
+             style="max-width: 750px;">
+      </div>
+    </section>
+
+    <!-- Institution Projects Section -->
+    <section class="mt-5">
+      <h2 class="text-center mb-4">Our Ongoing Institutional Projects</h2>
+      <div class="row g-4">
+        <!-- Project 1 -->
+        <div class="col-md-4">
+          <div class="card project-card shadow-sm">
+            <img src="{% static 'eturesultapp/img/lab-project.jpg' %}" alt="ICT Lab Project">
+            <div class="card-body">
+              <h5 class="card-title">Ongoing Construction at Bunumbu Campus</h5>
+              <p class="card-text">
+                Our extended campus at Bunumbu, Kailahun District, is under construction.
+                It includes modern hostels, lecture halls, and staff quarters for lecturers.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="col-md-4">
+          <div class="card project-card shadow-sm">
+            <img src="{% static 'eturesultapp/img/academy-photo.jpg' %}" alt="Green Campus Initiative">
+            <div class="card-body">
+              <h5 class="card-title">Green Campus Initiative</h5>
+              <p class="card-text">
+                A sustainable approach to creating an eco-friendly academic environment
+                with renewable energy and environmental conservation projects.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="col-md-4">
+          <div class="card project-card shadow-sm">
+            <img src="{% static 'eturesultapp/img/e-learning.jpg' %}" alt="E-Learning Platform">
+            <div class="card-body">
+              <h5 class="card-title">E-Learning Platform</h5>
+              <p class="card-text">
+                An online system to support virtual learning, assignments, and assessments
+                for students and lecturers across all campuses.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page Content Block -->
+    <main class="container">
+      {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-5 py-3 bg-light text-center">
+      <div class="container">
+        <small>© {{ now|date:"Y" }} Eastern Technical University — Student Results Management System</small>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

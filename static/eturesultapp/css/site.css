@@ -1,0 +1,233 @@
+:root {
+  /* ETU brand colors */
+  --etu-primary: #003366;  /* Deep navy blue */
+  --etu-secondary: #336699; /* Medium blue */
+  --etu-accent: #990000;   /* Deep red */
+  --etu-light: #f0f4f8;    /* Light blue-grey */
+  --etu-dark: #1a1a1a;     /* Almost black */
+}
+
+body { 
+  background: var(--etu-light);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.navbar {
+  background: var(--etu-primary) !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand { 
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-brand img {
+  width: 32px;
+  height: 32px;
+}
+
+.container main { 
+  padding-bottom: 2rem;
+  min-height: calc(100vh - 180px);
+}
+
+.card { 
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border: none;
+  border-radius: 8px;
+}
+
+.list-group-item {
+  border: none;
+  margin-bottom: 4px;
+  border-radius: 6px !important;
+}
+
+.list-group-item:hover {
+  background: var(--etu-light);
+}
+
+.list-group-item a { 
+  text-decoration: none;
+  color: var(--etu-dark);
+}
+
+h1 { 
+  margin-bottom: 1.5rem;
+  color: var(--etu-primary);
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: var(--etu-primary);
+  border-color: var(--etu-primary);
+}
+
+.btn-primary:hover {
+  background: var(--etu-secondary);
+  border-color: var(--etu-secondary);
+}
+
+.badge {
+  font-weight: 500;
+  padding: 0.4em 0.8em;
+}
+
+.footer { 
+  font-size: 0.9rem;
+  color: #666;
+  border-top: 1px solid #ddd;
+}
+
+/* Form styling */
+form label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+form input,
+form select {
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+}
+
+/* Sidebar styling */
+.sidebar {
+  min-height: calc(100vh - 56px);
+  box-shadow: inset -1px 0 0 rgba(0,0,0,0.05);
+  background-color: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+.sidebar .profile-section {
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  margin-bottom: 1rem;
+  background: linear-gradient(to bottom, var(--etu-light), white);
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  padding: .75rem 1rem;
+  color: var(--etu-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.2s ease;
+  border-radius: 0.5rem;
+  margin: 0.25rem 0.5rem;
+}
+
+.sidebar .nav-link:hover {
+  background-color: var(--etu-light);
+  text-decoration: none;
+  transform: translateX(5px);
+}
+
+.sidebar .nav-link.active {
+  color: var(--etu-primary);
+  background-color: var(--etu-light);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.sidebar .nav-link i {
+  width: 1.25rem;
+  text-align: center;
+  color: var(--etu-secondary);
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+  padding: 1rem;
+  color: #6c757d;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+@media (max-width: 767.98px) {
+  .sidebar {
+    position: fixed;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    width: 75%;
+    max-width: 250px;
+    transform: translateX(-100%);
+  }
+  
+  .sidebar.show {
+    transform: translateX(0);
+  }
+}
+
+/* Search box styling */
+.search-box {
+  max-width: 300px;
+  position: relative;
+}
+
+.search-box input {
+  padding-left: 2rem;
+  background: white;
+}
+
+.search-box::before {
+  content: "🔍";
+  position: absolute;
+  left: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.5;
+}
+
+/* Pagination styling */
+.pagination {
+  margin-top: 2rem;
+}
+
+.pagination .page-link {
+  color: var(--etu-primary);
+  padding: 0.5rem 1rem;
+}
+
+.pagination .page-item.active .page-link {
+  background: var(--etu-primary);
+  border-color: var(--etu-primary);
+}
+
+/* Small dashboard polish: slightly larger stat icons and consistent card spacing */
+.stat-icon { width: 56px; height: 56px; border-radius: 12px; }
+.dashboard-card .card-body { padding: 1.6rem; }
+.card .card-title { font-size: 1.05rem; }
+
+/* Improve footer contrast */
+footer { background: #ffffff; border-top: 1px solid #e9ecef; }
+
+/* Sidebar helpers used across lecturer/admin pages (moved from base.html) */
+.sidebar {
+  min-height: calc(100vh - 56px);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .05);
+}
+.sidebar .nav-link {
+  font-weight: 500;
+  padding: .75rem 1rem;
+  transition: all 0.15s;
+  color: #212529;
+}
+.sidebar .nav-link:hover { background-color: rgba(0,0,0,0.03); }
+.sidebar .nav-link.active { color: #fff; }
+.hover-bg-light:hover { background-color: rgba(0, 0, 0, .05) !important; }
+.sidebar-heading { font-size: .75rem; text-transform: uppercase; }
+
+/* Responsive collapse helper: hide on small, show on md+ */
+.sidebar-collapsed { display: none; }
+@media (min-width: 768px) {
+  .sidebar-collapsed { display: block !important; }
+}

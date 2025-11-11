@@ -1,0 +1,12 @@
+{% extends 'eturesultapp/base.html' %}
+{% block title %}Register Lecturer{% endblock %}
+{% block content %}
+<div class="container py-4">
+  <h2>Lecturer Registration</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary">Register</button>
+  </form>
+</div>
+{% endblock %}

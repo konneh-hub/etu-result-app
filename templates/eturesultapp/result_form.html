@@ -1,0 +1,24 @@
+{% extends "eturesultapp/base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    {% include 'eturesultapp/_sidebar.html' %}
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+      <h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Result</h1>
+      <form method="post" class="mt-3">{% csrf_token %}
+        <div class="row">
+          <div class="col-md-4">{{ form.student.label_tag }} {{ form.student }}</div>
+          <div class="col-md-4">{{ form.course.label_tag }} {{ form.course }}</div>
+          <div class="col-md-2">{{ form.grade.label_tag }} {{ form.grade }}</div>
+          <div class="col-md-2">{{ form.semester.label_tag }} {{ form.semester }}</div>
+        </div>
+        <div class="mt-3">
+          <button class="btn btn-primary" type="submit">Save</button>
+          <a class="btn btn-secondary" href="{% url 'eturesultapp:result_list' %}">Cancel</a>
+        </div>
+      </form>
+    </main>
+  </div>
+</div>
+{% endblock %}

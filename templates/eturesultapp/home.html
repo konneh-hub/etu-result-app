@@ -1,0 +1,203 @@
+{% extends "eturesultapp/base.html" %}
+{% load static %}
+
+{% block title %}Eastern Technical University — Home{% endblock %}
+
+{% block extra_css %}
+<style>
+  .hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 40px 20px;
+  }
+  
+  .logo-container {
+    margin-bottom: 40px;
+    animation: fadeInDown 0.8s ease-in-out;
+  }
+  
+  .logo-container img {
+    max-width: 150px;
+    height: auto;
+    filter: drop-shadow(0 4px 15px rgba(0,0,0,0.2));
+  }
+  
+  .hero-content {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeInUp 0.8s ease-in-out;
+  }
+  
+  .hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  }
+  
+  .hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    opacity: 0.95;
+    line-height: 1.6;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 80px;
+    flex-wrap: wrap;
+    animation: fadeInUp 1s ease-in-out;
+  }
+  
+  .cta-buttons .btn {
+    padding: 12px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+  
+  .btn-primary-custom {
+    background-color: #fff;
+    color: #667eea;
+    border: none;
+  }
+  
+  .btn-primary-custom:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
+  
+  .btn-secondary-custom {
+    background-color: rgba(255,255,255,0.2);
+    color: white;
+    border: 2px solid white;
+  }
+  
+  .btn-secondary-custom:hover {
+    background-color: rgba(255,255,255,0.3);
+    transform: translateY(-3px);
+    color: white;
+  }
+  
+  .features-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+  }
+  
+  .feature-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 35px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+    animation: fadeInUp 1.2s ease-in-out;
+  }
+  
+  .feature-card:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  }
+  
+  .feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+  
+  .feature-card p {
+    font-size: 1rem;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+  
+  .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    display: inline-block;
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+  <!-- Logo at the very top -->
+  <div class="logo-container">
+    <img src="{% static 'eturesultapp/img/etu-logo.png' %}" alt="ETU Logo" class="img-fluid">
+  </div>
+  
+  <!-- Hero Content -->
+  <div class="hero-content">
+    <h1>Eastern Technical University</h1>
+    <p>Results Management System</p>
+  </div>
+  
+  <!-- Main CTA Buttons -->
+  <div class="cta-buttons">
+    <a href="{% url 'login' %}" class="btn btn-primary-custom">Log In</a>
+    <a href="{% url 'eturesultapp:register_student' %}" class="btn btn-secondary-custom">Register as Student</a>
+  </div>
+  
+  <!-- Features Grid -->
+  <div class="features-section">
+    <div class="feature-card">
+      <div class="feature-icon">
+        <i class="fas fa-user-graduate"></i>
+      </div>
+      <h3>For Students</h3>
+      <p>View your results, download transcripts, and manage your academic profile with ease.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">
+        <i class="fas fa-chalkboard-user"></i>
+      </div>
+      <h3>For Lecturers</h3>
+      <p>Record and manage student grades, track performance, and generate comprehensive reports.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">
+        <i class="fas fa-chart-line"></i>
+      </div>
+      <h3>Advanced Analytics</h3>
+      <p>Access detailed analytics, performance insights, and generate data-driven reports.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

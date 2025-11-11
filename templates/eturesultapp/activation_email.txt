@@ -1,0 +1,12 @@
+Hello {{ user.first_name }},
+
+Thank you for registering at {{ site_name }}.
+
+Please click the link below to activate your account:
+
+{{ activation_link }}
+
+If you did not sign up for this account, you can ignore this email.
+
+Thanks,
+The {{ site_name }} team

@@ -1,0 +1,43 @@
+{% extends "eturesultapp/base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    {% include 'eturesultapp/_sidebar.html' %}
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1>{{ student.student_id }} — {{ student.last_name }}, {{ student.first_name }}</h1>
+        <div>
+          <a class="btn btn-primary me-2" href="{% url 'eturesultapp:student_edit' student.pk %}">Edit</a>
+          <a class="btn btn-danger" href="{% url 'eturesultapp:student_delete' student.pk %}">Delete</a>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-6">
+          <div class="card p-3">
+            <p><strong>Email:</strong> {{ student.email|default:'—' }}</p>
+            <p><strong>Enrolled:</strong> {{ student.enrollment_date|default:'—' }}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h4>Results</h4>
+          <ul class="list-group">
+            {% for r in student.results.all %}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>{{ r.course.code }} — {{ r.course.name }} <small class="text-muted">({{ r.semester }})</small></div>
+                <div class="badge bg-secondary">{{ r.grade }}</div>
+              </li>
+            {% empty %}
+              <li class="list-group-item">No results recorded.</li>
+            {% endfor %}
+          </ul>
+          <p class="mt-2"><a class="btn btn-sm btn-success" href="{% url 'eturesultapp:result_create' %}">Add result</a></p>
+        </div>
+      </div>
+
+      <p class="mt-4"><a href="{% url 'eturesultapp:student_list' %}">← Back to students</a></p>
+    </main>
+  </div>
+</div>
+{% endblock %}

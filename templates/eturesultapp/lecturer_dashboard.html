@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Lecturer Dashboard - ETU Results Management System{% endblock %}
+
+{% block content %}
+<div class="page-header mb-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h1><i class="fas fa-chalkboard-user me-2"></i>Lecturer Dashboard</h1>
+            <p>Welcome, {{ lecturer.user.get_full_name }}</p>
+        </div>
+        <div>
+            {% if lecturer.is_admin_assistant %}
+            <span class="badge bg-info me-2">Admin Assistant</span>
+            {% endif %}
+            <span class="badge bg-primary">Staff ID: {{ lecturer.staff_id }}</span>
+        </div>
+    </div>
+</div>
+
+<!-- Overview Cards -->
+<div class="stats-grid mb-4">
+    <!-- Active Courses Card -->
+    <div class="dashboard-card primary">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="stat-label">Active Courses</div>
+                    <div class="stat-number">{{ lecturer.courses.count }}</div>
+                </div>
+                <div class="stat-icon text-primary">
+                    <i class="fas fa-book"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Students Card -->
+    <div class="dashboard-card success">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="stat-label">Total Students</div>
+                    <div class="stat-number">{{ total_students }}</div>
+                </div>
+                <div class="stat-icon text-success">
+                    <i class="fas fa-users"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Recorded Card -->
+    <div class="dashboard-card info">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="stat-label">Results Recorded</div>
+                    <div class="stat-number">{{ total_results }}</div>
+                </div>
+                <div class="stat-icon text-info">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Lecturer Information -->
+<div class="dashboard-card mb-4">
+    <div class="card-header bg-light border-bottom">
+        <h5 class="mb-0">
+            <i class="fas fa-user-tie me-2"></i>Your Information
+        </h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label class="form-label text-muted">Full Name</label>
+                    <p class="mb-0"><strong>{{ lecturer.user.get_full_name }}</strong></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label class="form-label text-muted">Staff ID</label>
+                    <p class="mb-0"><strong>{{ lecturer.staff_id }}</strong></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label class="form-label text-muted">Department</label>
+                    <p class="mb-0"><strong>{{ lecturer.department }}</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label class="form-label text-muted">Email</label>
+                    <p class="mb-0">{{ lecturer.user.email }}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label class="form-label text-muted">Role</label>
+                    <p class="mb-0">
+                        <span class="badge bg-primary">Lecturer</span>
+                        {% if lecturer.is_admin_assistant %}
+                        <span class="badge bg-info">Admin Assistant</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- My Courses Section -->
+<div class="dashboard-card mb-4">
+    <div class="card-header bg-light border-bottom d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+            <i class="fas fa-book-open me-2"></i>My Assigned Courses
+        </h5>
+        <a href="{% url 'eturesultapp:course_list' %}" class="btn btn-sm btn-primary">
+            <i class="fas fa-list me-1"></i>View All Courses
+        </a>
+    </div>
+    <div class="card-body p-0">
+        {% if lecturer.courses.all %}
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th><i class="fas fa-barcode me-2"></i>Code</th>
+                        <th><i class="fas fa-book me-2"></i>Course Name</th>
+                        <th><i class="fas fa-calendar me-2"></i>Semester</th>
+                        <th><i class="fas fa-graduation-cap me-2"></i>Credits</th>
+                        <th><i class="fas fa-cog me-2"></i>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in lecturer.courses.all %}
+                    <tr>
+                        <td><strong>{{ course.code }}</strong></td>
+                        <td>{{ course.name }}</td>
+                        <td>
+                            <span class="badge bg-info">{{ course.semester }}</span>
+                        </td>
+                        <td>{{ course.credits }} Credits</td>
+                        <td>
+                            <a href="{% url 'eturesultapp:result_list' %}" class="btn btn-sm btn-primary">
+                                <i class="fas fa-chart-line me-1"></i>Manage Results
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-state-icon">
+                <i class="fas fa-inbox"></i>
+            </div>
+            <p>No courses assigned yet.</p>
+            <a href="{% url 'eturesultapp:course_list' %}" class="btn btn-primary mt-2">
+                <i class="fas fa-book me-1"></i>Browse Courses
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Actions & Student CTA -->
+<div class="row">
+    <div class="col-lg-8">
+        <div class="dashboard-card mt-3">
+            <div class="card-header bg-light border-bottom">
+                <h5 class="mb-0"><i class="fas fa-tools me-2"></i>Actions</h5>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="{% url 'eturesultapp:result_list' %}" class="list-group-item list-group-item-action">
+                    <i class="fas fa-chart-bar me-2 text-primary"></i>
+                    <span>Manage Results</span>
+                    <i class="fas fa-arrow-right float-end text-muted"></i>
+                </a>
+                <a href="{% url 'eturesultapp:student_list' %}" class="list-group-item list-group-item-action">
+                    <i class="fas fa-users me-2 text-success"></i>
+                    <span>View All Students</span>
+                    <i class="fas fa-arrow-right float-end text-muted"></i>
+                </a>
+                <a href="{% url 'eturesultapp:result_create' %}" class="list-group-item list-group-item-action">
+                    <i class="fas fa-plus-circle me-2 text-info"></i>
+                    <span>Record New Result</span>
+                    <i class="fas fa-arrow-right float-end text-muted"></i>
+                </a>
+                {% if lecturer.is_admin_assistant %}
+                <a href="{% url 'eturesultapp:admin_settings' %}" class="list-group-item list-group-item-action">
+                    <i class="fas fa-user-cog me-2 text-warning"></i>
+                    <span>Admin Settings</span>
+                    <i class="fas fa-arrow-right float-end text-muted"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card mb-3 text-center">
+            <div class="card-header bg-light border-bottom">
+                <h5 class="mb-0"><i class="fas fa-graduation-cap me-2"></i>Student Access</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Students should register and activate their accounts to access personal results.</p>
+                <a href="{% url 'eturesultapp:register_student' %}" class="btn btn-primary btn-sm me-2">Register</a>
+                <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-sm">Login</a>
+            </div>
+        </div>
+
+        {% if lecturer.is_admin_assistant %}
+        <div class="info-box success mt-3">
+            <i class="fas fa-star me-2"></i>
+            <strong>Admin Privileges:</strong>
+            <p class="mb-0 mt-2">As an admin assistant, you may access additional administrative tools from Settings or Admin area (where allowed).</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
